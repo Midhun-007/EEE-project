@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Energy Project</title>
+  <style>
+    /* General Styles */
+    body {
+        font-family: 'Poppins', sans-serif;
+        background-color: #f7f7f7; /* Light background */
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        color: #333;
+        transition: background 0.3s ease;
+    }
+  
+    h1 {
+        font-size: 4rem;
+        color: #333;
+        margin-bottom: 20px;
+        text-transform: uppercase;
+        font-weight: bold;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        animation: fadeIn 1s ease-in-out;
+    }
+  
+    h2 {
+        font-size: 2.5rem;
+        color: #555;
+        margin-bottom: 20px;
+        font-weight: 300;
+        text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+    }
+  
+    p {
+        font-size: 1.3rem;
+        color: #666;
+        text-align: center;
+        line-height: 1.8;
+        animation: fadeIn 1.2s ease-in-out;
+    }
+  
+    /* Button Styles */
+    button {
+        display: inline-block;
+        font-size: 1.2rem;
+        color: #fff;
+        background: linear-gradient(45deg, #6c63ff, #ff0077); /* Light gradient */
+        border: none;
+        border-radius: 30px;
+        padding: 14px 30px;
+        margin: 12px 0;
+        cursor: pointer;
+        transition: transform 0.3s ease, background 0.3s ease, box-shadow 0.4s ease;
+        box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+        animation: fadeIn 1.5s ease-in-out;
+    }
+  
+    button:hover {
+        background: linear-gradient(45deg, #ff0077, #6c63ff);
+        transform: scale(1.1);
+        box-shadow: 0 12px 25px rgba(0, 0, 0, 0.3);
+    }
+  
+    button:active {
+        transform: scale(0.98);
+        box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+    }
+  
+    /* Container Styles */
+    .hidden {
+        display: none;
+    }
+  
+    #main-screen, #daily-tasks-screen, #green-tasks-screen {
+        text-align: center;
+        background: rgba(255, 255, 255, 0.9); /* Light background */
+        padding: 50px 40px;
+        border-radius: 20px;
+        box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        width: 90%;
+        max-width: 800px;
+        position: relative;
+        z-index: 1;
+        animation: fadeInUp 1s ease-in-out;
+    }
+  
+    /* Task Input Area */
+    #task-input-area {
+        margin: 30px 0;
+    }
+  
+    #task-input {
+        font-size: 1.2rem;
+        padding: 15px 20px;
+        width: calc(100% - 130px);
+        border: 2px solid #aaa;
+        border-radius: 30px;
+        margin-right: 20px;
+        background-color: rgba(255, 255, 255, 0.8);
+        color: #333;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        transition: all 0.3s ease;
+    }
+  
+    #task-input:focus {
+        outline: none;
+        border-color: #6c63ff;
+        box-shadow: 0 0 10px rgba(108, 99, 255, 0.6);
+    }
+  
+    /* Task List */
+    #task-list, #green-tasks-list {
+        list-style: none;
+        padding: 0;
+        margin: 30px 0;
+        text-align: left;
+    }
+  
+    #task-list li, #green-tasks-list div {
+        background: rgba(0, 0, 0, 0.05);
+        color: #333;
+        border: 2px solid #6c63ff;
+        padding: 25px;
+        border-radius: 15px;
+        margin-bottom: 20px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        transition: all 0.4s ease;
+        box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+    }
+  
+    #task-list li.completed, #green-tasks-list div.completed {
+        text-decoration: line-through;
+        background: rgba(0, 0, 0, 0.1);
+        color: #888;
+    }
+  
+    /* Progress Bar */
+    .progress-bar {
+        background: #ddd;
+        border-radius: 20px;
+        height: 25px;
+        margin: 30px 0;
+        position: relative;
+        width: 100%;
+        box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+    }
+  
+    .progress-bar-fill {
+        background: linear-gradient(45deg, #ff0077, #6c63ff);
+        height: 100%;
+        width: 0%;
+        border-radius: 20px;
+        transition: width 0.6s ease-in-out, background-color 0.4s ease-in-out;
+    }
+  
+    /* Score Display */
+    #score-display {
+        font-size: 1.4rem;
+        font-weight: bold;
+        color: #6c63ff;
+        margin: 25px 0;
+        text-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+  
+    /* Navbar Styles */
+    nav {
+        position: fixed;
+        top: 0;
+        width: 100%;
+        background-color: #fff;
+        padding: 15px 0;
+        display: flex;
+        align-items: center;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        z-index: 10;
+    }
+  
+    nav .brand {
+        flex-grow: 1;
+        text-align: center;
+        font-size: 24px;
+        font-weight: bold;
+        color: #333;
+    }
+  
+    nav .links {
+        margin-right: 20px;
+    }
+  
+    nav a {
+        color: #333;
+        text-decoration: none;
+        padding: 12px 18px;
+        display: inline-block;
+        transition: background-color 0.3s ease, color 0.3s ease;
+        font-size: 16px;
+    }
+  
+    nav a:hover {
+        background-color: #6c63ff;
+        border-radius: 5px;
+        color: #fff;
+    }
+  
+    /* Animations */
+    @keyframes fadeIn {
+        0% {
+            opacity: 0;
+        }
+        100% {
+            opacity: 1;
+        }
+    }
+  
+    @keyframes fadeInUp {
+        0% {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        100% {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+  
+    /* Responsive Design */
+    @media (max-width: 768px) {
+        h1 {
+            font-size: 3rem;
+        }
+  
+        h2 {
+            font-size: 2rem;
+        }
+  
+        button {
+            font-size: 1.1rem;
+            padding: 12px 25px;
+        }
+  
+        #task-input {
+            width: calc(100% - 100px);
+        }
+  
+        #task-list li, #green-tasks-list div {
+            padding: 20px;
+            font-size: 1rem;
+        }
+    }
+  
+    @media (max-width: 480px) {
+        h1 {
+            font-size: 2.5rem;
+        }
+  
+        h2 {
+            font-size: 1.6rem;
+        }
+  
+        #task-input {
+            width: calc(100% - 80px);
+        }
+  
+        button {
+            font-size: 1rem;
+            padding: 12px 18px;
+        }
+    }
+  </style>
+  
+  
+</head>
+
+<body>
+    <nav>
+        <div class="brand">Innovators</div>
+        <div class="links">
+            <a href="/Street">Street Light</a>
+            <a href="/teams">Teams</a>
+            <a href="/greenify">Greenify</a>
+            <a href="/bioplastic">Bioplastic</a>
+        </div>
+    </nav>
+  <div id="main-screen">
+    <h1>🌱 Greenify</h1>
+    <p>Choose your path to a greener future:</p>
+    <button id="daily-tasks-btn">Daily Tasks</button>
+    <button id="green-tasks-btn">Green Tasks</button>
+  </div>
+
+  <!-- Daily Tasks Screen -->
+  <div id="daily-tasks-screen" class="hidden">
+    <h2>Daily Tasks</h2>
+    <button id="add-task-btn" class="animated-button">Add Task</button>
+    <div id="task-input-area" class="hidden">
+      <input type="text" id="task-input" placeholder="Enter your task">
+      <button id="save-task-btn",>Save Task</button>
+    </div>
+    <ul id="task-list"></ul>
+    <div class="progress-bar">
+      <div class="progress-bar-fill" id="daily-progress-fill"></div>
+    </div>
+    <button id="back-btn">Back</button>
+  </div>
+
+  <!-- Green Tasks Screen -->
+  <div id="green-tasks-screen" class="hidden">
+    <h2>Complete Eco-Friendly Tasks</h2>
+    <p>Complete these tasks related to the Sustainable Development Goals and earn points!</p>
+    <button id="generate-green-task-btn">Generate Green Tasks</button>
+    <div id="green-tasks-list"></div>
+    <div class="progress-bar">
+      <div class="progress-bar-fill" id="green-progress-fill"></div>
+    </div>
+    <p id="score-display">Your Score: 0</p>
+    <button id="back-green-btn">Back</button>
+  </div>
+
+  <script>
+    // Main Elements
+const mainScreen = document.getElementById("main-screen");
+const dailyTasksScreen = document.getElementById("daily-tasks-screen");
+const greenTasksScreen = document.getElementById("green-tasks-screen");
+
+// Buttons
+const dailyTasksBtn = document.getElementById("daily-tasks-btn");
+const greenTasksBtn = document.getElementById("green-tasks-btn");
+const addTaskBtn = document.getElementById("add-task-btn");
+const backBtn = document.getElementById("back-btn");
+const backGreenBtn = document.getElementById("back-green-btn");
+const saveTaskBtn = document.getElementById("save-task-btn");
+const generateGreenTaskBtn = document.getElementById("generate-green-task-btn");
+const resetProgressBtn = document.createElement('button');
+
+// Task Elements
+const taskInputArea = document.getElementById("task-input-area");
+const taskInput = document.getElementById("task-input");
+const taskList = document.getElementById("task-list");
+const dailyProgressFill = document.getElementById("daily-progress-fill");
+
+// Green Task Elements
+const greenTasksList = document.getElementById("green-tasks-list");
+const greenProgressFill = document.getElementById("green-progress-fill");
+const scoreDisplay = document.getElementById("score-display");
+
+// Data
+let tasks = [];
+let score = 0;
+let greenTasksCompleted = 0;
+let greenTasksTotal = 0;
+let greenTasksData = [];
+
+// Predefined Green Tasks (to be replaced with AI integration)
+const greenTasks = [
+  "Reduce your carbon footprint by walking or biking instead of driving.",
+  "Conserve water by taking shorter showers and using water-efficient appliances.",
+  "Use public transport to reduce emissions and pollution.",
+  "Switch to renewable energy sources like solar or wind power.",
+  "Support sustainable agriculture by buying local organic produce.",
+  "Switch to reusable products to reduce plastic waste.",
+  "Plant a tree to support biodiversity and combat deforestation.",
+  "Support education for all, promoting gender equality in education.",
+  "Recycle your waste to reduce the environmental impact on landfills."
+];
+
+// Navigation Functions
+function showDailyTasks() {
+  mainScreen.classList.add("hidden");
+  dailyTasksScreen.classList.remove("hidden");
+}
+
+function showGreenTasks() {
+  mainScreen.classList.add("hidden");
+  greenTasksScreen.classList.remove("hidden");
+}
+
+function goBackToMain() {
+  dailyTasksScreen.classList.add("hidden");
+  greenTasksScreen.classList.add("hidden");
+  mainScreen.classList.remove("hidden");
+}
+
+// Daily Task Functions
+function displayTaskInput() {
+  taskInputArea.classList.remove("hidden");
+}
+
+function saveTask() {
+  const task = taskInput.value.trim();
+  if (task) {
+    tasks.push({ name: task, completed: false });
+    taskInput.value = ""; // Clear input field
+    taskInputArea.classList.add("hidden");
+    updateTaskList();
+  } else {
+    alert("Please enter a valid task.");
+  }
+}
+
+function updateTaskList() {
+  taskList.innerHTML = "";
+  tasks.forEach((task, index) => {
+    const li = document.createElement("li");
+    li.innerHTML = ` 
+      <label for="task-${index}">${task.name}</label>
+      <input type="checkbox" id="task-${index}" ${task.completed ? "checked" : ""}>
+      <span id="delete-${index}">❌</span>
+    `;
+    taskList.appendChild(li);
+
+    const checkbox = document.getElementById(`task-${index}`);
+    checkbox.addEventListener("change", () => {
+      task.completed = checkbox.checked;
+      updateDailyProgress();
+    });
+
+    const deleteButton = document.getElementById(`delete-${index}`);
+    deleteButton.addEventListener("click", () => {
+      tasks.splice(index, 1);
+      updateTaskList(); // Re-render the task list after deletion
+    });
+  });
+}
+
+function updateDailyProgress() {
+  const totalTasks = tasks.length;
+  const completedTasks = tasks.filter(task => task.completed).length;
+  const progress = totalTasks > 0 ? (completedTasks / totalTasks) * 100 : 0;
+  dailyProgressFill.style.width = `${progress}%`;
+}
+
+// Green Task Functions
+function generateGreenTasks() {
+  // Check if tasks have been generated already
+  if (greenTasksData.length === 0 || greenTasksCompleted === 3) {
+    const selectedTasks = [];
+    while (selectedTasks.length < 3) {
+      const randomIndex = Math.floor(Math.random() * greenTasks.length);
+      if (!selectedTasks.includes(greenTasks[randomIndex])) {
+        selectedTasks.push(greenTasks[randomIndex]);
+      }
+    }
+
+    greenTasksData = selectedTasks;
+    greenTasksTotal = selectedTasks.length;
+    greenTasksCompleted = 0; // Reset completed tasks for the new batch
+
+    // Display tasks to the user
+    greenTasksList.innerHTML = "";
+    selectedTasks.forEach((task, index) => {
+      const taskDiv = document.createElement("div");
+      taskDiv.innerHTML = ` 
+        <label for="green-task-${index}">${task}</label>
+        <button class="add-image-btn" data-task-index="${index}">Upload Image</button>
+        <div id="image-upload-${index}" class="image-upload"></div>
+      `;
+      greenTasksList.appendChild(taskDiv);
+
+      const addImageBtn = document.querySelector(`.add-image-btn[data-task-index="${index}"]`);
+      addImageBtn.addEventListener("click", () => {
+        showImageUploadForm(index);
+      });
+    });
+    updateGreenProgress();
+  }
+}
+
+function showImageUploadForm(taskIndex) {
+  const uploadDiv = document.getElementById(`image-upload-${taskIndex}`);
+  uploadDiv.innerHTML = ` 
+    <input type="file" id="image-input-${taskIndex}" accept="image/*">
+    <button onclick="uploadImage(${taskIndex})">Upload Image</button>
+    <p id="image-status-${taskIndex}"></p>
+  `;
+}
+
+function uploadImage(taskIndex) {
+  const imageInput = document.getElementById(`image-input-${taskIndex}`);
+  const statusText = document.getElementById(`image-status-${taskIndex}`);
+  
+  if (imageInput.files.length > 0) {
+    const file = imageInput.files[0];
+    const reader = new FileReader();
+    reader.onload = function(e) {
+      statusText.innerText = "Task Completed!";
+      const img = document.createElement("img");
+      img.src = e.target.result;
+      img.alt = "Task image";
+      img.style.maxWidth = "200px";
+      img.style.marginTop = "10px";
+      statusText.appendChild(img);
+
+      // Update progress and add points
+      greenTasksCompleted += 1;
+      updateGreenProgress();
+
+      // Add 10 points per task
+      score += 10;
+      scoreDisplay.innerText = `Your Score: ${score}`;
+
+      // Remove the task after image upload
+      setTimeout(() => {
+        greenTasksData.splice(taskIndex, 1);
+        updateGreenTasksList();
+      }, 500); // Adding delay to simulate image upload process
+
+      // After completing 3 tasks, keep the score same and regenerate tasks
+      if (greenTasksCompleted === 3) {
+        setTimeout(() => {
+          alert("Congratulations! You've completed all tasks!");
+          generateGreenTasks(); // Regenerate tasks after completing
+        }, 1000);
+      }
+    };
+    reader.readAsDataURL(file);
+  } else {
+    statusText.innerText = "No image selected.";
+  }
+}
+
+function updateGreenTasksList() {
+  greenTasksList.innerHTML = "";
+  greenTasksData.forEach((task, index) => {
+    const taskDiv = document.createElement("div");
+    taskDiv.innerHTML = ` 
+      <label for="green-task-${index}">${task}</label>
+      <button class="add-image-btn" data-task-index="${index}">Upload Image</button>
+      <div id="image-upload-${index}" class="image-upload"></div>
+    `;
+    greenTasksList.appendChild(taskDiv);
+
+    const addImageBtn = document.querySelector(`.add-image-btn[data-task-index="${index}"]`);
+    addImageBtn.addEventListener("click", () => {
+      showImageUploadForm(index);
+    });
+  });
+  updateGreenProgress();
+}
+
+function updateGreenProgress() {
+  const progress = (greenTasksCompleted / greenTasksTotal) * 100;
+  greenProgressFill.style.width = `${progress}%`;
+
+  // Keep score the same after completing 3 tasks
+  if (greenTasksCompleted === 3) {
+    scoreDisplay.innerText = `Your Score: ${score}`;
+  }
+}
+
+// Reset User Progress
+resetProgressBtn.textContent = "Reset Progress";
+resetProgressBtn.addEventListener("click", resetProgress);
+
+// Add Reset Progress button only to Green Tasks screen
+greenTasksScreen.appendChild(resetProgressBtn);
+
+function resetProgress() {
+  greenTasksData = [];
+  greenTasksCompleted = 0;
+  greenTasksTotal = 0;
+  score = 0;
+  greenTasksList.innerHTML = "";
+  greenProgressFill.style.width = "0%";
+  scoreDisplay.innerText = `Your Score: ${score}`;
+  generateGreenTasks(); // Regenerate tasks
+}
+
+// Event Listeners
+dailyTasksBtn.addEventListener("click", showDailyTasks);
+greenTasksBtn.addEventListener("click", showGreenTasks);
+backBtn.addEventListener("click", goBackToMain);
+backGreenBtn.addEventListener("click", goBackToMain);
+addTaskBtn.addEventListener("click", displayTaskInput);
+saveTaskBtn.addEventListener("click", saveTask);
+generateGreenTaskBtn.addEventListener("click", generateGreenTasks);
+
+  </script>
+</body>
+</html>

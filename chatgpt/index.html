@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IOtians - Team</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        /* General Styles */
+        body {
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            padding: 0;
+            color: #333;
+            background-color: #f4f7fc; /* Soft background color */
+            overflow-x: hidden; /* Prevent horizontal scrollbar */
+            overflow-y: scroll; /* Allow vertical scrolling */
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        body::-webkit-scrollbar{
+            display: none;
+        }
+        html, body {
+            overflow: auto; /* Allow scrolling */
+            height: 100%; /* Make sure the page can still scroll */
+        }
+        /* Navbar Styles */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: #2C3E50; /* Dark navbar color */
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 20px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+        }
+
+        header .logo {
+            font-size: 22px;
+            font-weight: 600;
+        }
+
+        header nav {
+            display: flex;
+            gap: 10px;
+            margin-right: 35px;
+        }
+
+        header nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s ease;
+        }
+
+        header nav a:hover {
+            color: #ecf0f1; /* Lighter color on hover */
+        }
+
+        /* Hero Section */
+        section {
+            padding: 100px 20px;
+            text-align: center;
+            min-height: 100vh;
+        }
+
+        .hero {
+            background: #3498db; /* Soft blue background */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            border-radius: 10px;
+            padding: 40px;
+        }
+
+        .hero h1 {
+            font-size: 38px;
+            margin-bottom: 15px;
+            color: white;
+        }
+
+        .hero p {
+            font-size: 20px;
+            color: #ecf0f1;
+            margin-bottom: 20px;
+        }
+
+        .hero .location-btn {
+            background-color: #27ae60; /* Green button */
+            color: white;
+            font-size: 20px;
+            padding: 12px 30px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .hero .location-btn:hover {
+            background-color: #2ecc71; /* Lighter green on hover */
+        }
+
+        .location-output {
+            margin-top: 20px;
+            font-size: 20px;
+            color: #ecf0f1;
+            font-weight: bold;
+        }
+
+        /* Team Section */
+        .team {
+            background: #f4f7fc; /* Soft background color for team section */
+            padding: 50px 20px;
+        }
+
+        .team h2 {
+            font-size: 32px;
+            color: #2C3E50;
+            margin-bottom: 20px;
+        }
+
+        .team-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 30px;
+        }
+
+        .team-card {
+            background: white;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            width: 250px;
+            padding: 25px;
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .team-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .team-card span {
+            font-weight: bold;
+            font-size: 20px;
+            display: block;
+            margin-bottom: 10px;
+            color: #2C3E50;
+        }
+
+        .team-card .role {
+            font-size: 18px;
+            color: #7f8c8d;
+        }
+
+        /* Contact Section */
+        .contact {
+            background: #ecf0f1; /* Light gray background */
+        }
+
+        .contact h2 {
+            font-size: 32px;
+            color: #2C3E50;
+            margin-bottom: 30px;
+        }
+
+        .contact form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .contact form input,
+        .contact form textarea {
+            width: 80%;
+            max-width: 500px;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            font-size: 16px;
+        }
+
+        .contact form button {
+            background: #2C3E50;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            cursor: pointer;
+            font-size: 18px;
+            border-radius: 8px;
+            transition: background-color 0.3s;
+        }
+
+        .contact form button:hover {
+            background: #34495e; /* Darker shade on hover */
+        }
+
+        /* Footer */
+        footer {
+            background: #2C3E50;
+            color: white;
+            text-align: center;
+            padding: 15px 20px;
+        }
+
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <header>
+        <div class="logo">IOtians</div>
+        <nav>
+            <a href="#home">Home</a>
+            <a href="#team">Team</a>
+            
+        </nav>
+    </header>
+
+    <!-- Hero Section with Latitude & Longitude Button -->
+    <section id="home" class="hero">
+        <h1>Welcome to IOtians</h1>
+        <p>Click the button below to get your Latitude and Longitude!</p>
+        <button class="location-btn" onclick="getLocation()">Get Location</button>
+        <div class="location-output" id="locationOutput"></div>
+    </section>
+
+    <!-- Team Section -->
+    <section id="team" class="team">
+        <h2>Meet Our Team</h2>
+        <div class="team-container">
+            <div class="team-card">
+                <span>Midhun</span>
+                <div class="role">Team Lead</div>
+            </div>
+            <div class="team-card">
+                <span>Abinav</span>
+                <div class="role">Backend Developer</div>
+            </div>
+            <div class="team-card">
+                <span>Sachin</span>
+                <div class="role">Frontend Developer</div>
+            </div>
+            <div class="team-card">
+                <span>Karthikeyan</span>
+                <div class="role">DevOps Engineer</div>
+            </div>
+            <div class="team-card">
+                <span>Abinesh</span>
+                <div class="role">UI/UX Designer</div>
+            </div>
+            <div class="team-card">
+                <span>Vishal</span>
+                <div class="role">QA Tester</div>
+            </div>
+            <div class="team-card">
+                <span>Gokul</span>
+                <div class="role">AI Specialist</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <h2>Contact Us</h2>
+        <p>For inquiries or collaboration opportunities, reach out to us!</p>
+        <form>
+            <input type="text" placeholder="Your Name" required>
+            <input type="email" placeholder="Your Email" required>
+            <textarea placeholder="Your Message" rows="4" required></textarea>
+            <button type="submit">Send Message</button>
+        </form>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>© 2024 IOtians. All Rights Reserved.</p>
+    </footer>
+
+    <script>
+        // JavaScript to get the user's Latitude and Longitude
+        function getLocation() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(showPosition, showError);
+            } else {
+                document.getElementById("locationOutput").innerHTML = "Geolocation is not supported by this browser.";
+            }
+        }
+
+        function showPosition(position) {
+            const latitude = position.coords.latitude;
+            const longitude = position.coords.longitude;
+            document.getElementById("locationOutput").innerHTML = `Latitude: ${latitude}<br>Longitude: ${longitude}`;
+        }
+
+        function showError(error) {
+            switch(error.code) {
+                case error.PERMISSION_DENIED:
+                    document.getElementById("locationOutput").innerHTML = "User denied the request for Geolocation.";
+                    break;
+                case error.POSITION_UNAVAILABLE:
+                    document.getElementById("locationOutput").innerHTML = "Location information is unavailable.";
+                    break;
+                case error.TIMEOUT:
+                    document.getElementById("locationOutput").innerHTML = "The request to get user location timed out.";
+                    break;
+                case error.UNKNOWN_ERROR:
+                    document.getElementById("locationOutput").innerHTML = "An unknown error occurred.";
+                    break;
+            }
+        }
+    </script>
+</body>
+</html>
+
+
+
+
+

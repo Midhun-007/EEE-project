@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Energy Project</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        /* General Styles */
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            background-color: #e8f5e9; /* Light green background */
+            color: #333;
+            overflow-x: hidden;
+        }
+
+        /* Reusing Navbar Styles */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background-color: #333;
+            padding: 10px 0;
+            display: flex;
+            align-items: center;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            z-index: 10;
+            animation: navSlideIn 1s ease-out;
+        }
+
+        nav .brand {
+            flex-grow: 1;
+            text-align: center;
+            font-size: 20px;
+            font-weight: bold;
+            color: white;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        nav .links {
+            margin-right: 20px;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            padding: 14px 20px;
+            display: inline-block;
+            transition: background-color 0.3s ease, color 0.3s ease;
+            animation: linkFadeIn 0.8s ease-out;
+        }
+
+        nav a:hover {
+            background-color: #575757;
+            border-radius: 5px;
+        }
+
+        /* Hero Section */
+        .hero {
+            text-align: center;
+            margin-top: 250px;
+            padding: 50px 20px;
+            background: linear-gradient(135deg, #66bb6a, #388e3c); /* Green gradient */
+            color: white;
+            animation: heroSectionFadeIn 1s ease-out;
+        }
+
+        .hero h1 {
+            font-size: 36px;
+            margin-bottom: 10px;
+            animation: slideInLeft 1s ease-out;
+        }
+
+        .hero p {
+            font-size: 18px;
+            line-height: 1.6;
+            animation: slideInRight 1s ease-out;
+        }
+
+        /* Content Section */
+        .content-container {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 0 20px;
+            margin-top: 100px;
+            animation: fadeInUp 1.2s ease-out;
+        }
+
+        .card {
+            background: white;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+            border-radius: 12px;
+            padding: 20px;
+            margin: 20px 0;
+            margin-top: 100px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            animation: cardFadeIn 1s ease-out;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .card h2 {
+            color: #66bb6a; /* Light green */
+            font-size: 24px;
+            margin-bottom: 10px;
+            transition: color 0.3s ease;
+        }
+
+        .card:hover h2 {
+            color: #388e3c; /* Dark green */
+        }
+
+        .card p {
+            font-size: 16px;
+            line-height: 1.6;
+            color: #555;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.9);
+            color: white;
+            margin-top: 40px;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        footer p {
+            margin: 0;
+            font-size: 14px;
+        }
+
+        /* Animations */
+        @keyframes navSlideIn {
+            from {
+                transform: translateY(-100%);
+            }
+
+            to {
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes linkFadeIn {
+            from {
+                opacity: 0;
+                transform: translateX(-20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes heroSectionFadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes slideInRight {
+            from {
+                opacity: 0;
+                transform: translateX(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes cardFadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navbar -->
+
+    <nav>
+        <div class="brand">Innovators</div>
+        <div class="links">
+            <a href="/Street">Street Light</a>
+            <a href="/teams">Teams</a>
+            <a href="/greenify">Greenify</a>
+            <a href="/bioplastic">Bioplastic</a>
+        </div>
+    </nav>
+    <!-- Hero Section -->
+    <section class="hero">
+        <h1>Bioplastic: Shaping a Sustainable Future</h1>
+        <p>Discover the impact of bioplastics on the environment, their applications, and their potential to transform the future.</p>
+    </section><!-- Content Section -->
+    <div class="content-container">
+        <!-- What are Bioplastics -->
+        <div class="card">
+            <h2>What are Bioplastics?</h2>
+            <p>
+                Bioplastics are materials derived from renewable sources like plants, algae, and microorganisms. Unlike conventional plastics made from petroleum, bioplastics are designed to be biodegradable and have a lower environmental footprint.
+            </p>
+        </div>
+
+        <!-- Importance of Bioplastics -->
+        <div class="card">
+            <h2>Why Are Bioplastics Important?</h2>
+            <p>
+                Bioplastics offer a sustainable alternative to traditional plastics, reducing dependency on fossil fuels. They are key in addressing plastic pollution and mitigating climate change due to their lower carbon emissions during production.
+            </p>
+        </div>
+
+        <!-- Environmental Impact -->
+        <div class="card">
+            <h2>Environmental Impact of Bioplastics</h2>
+            <p>
+                Bioplastics decompose more quickly than traditional plastics, reducing landfill waste. Additionally, their production generates fewer greenhouse gases, contributing to a greener and cleaner planet.
+            </p>
+        </div>
+
+        <!-- Current Applications -->
+        <div class="card">
+            <h2>Current Applications of Bioplastics</h2>
+            <p>
+                Bioplastics are used in:
+                <ul>
+                    <li>Packaging materials (e.g., food containers, bags)</li>
+                    <li>Medical devices and disposables</li>
+                    <li>Electronics components</li>
+                    <li>Automotive interiors</li>
+                </ul>
+            </p>
+        </div>
+
+        <!-- Challenges -->
+        <div class="card">
+            <h2>Challenges and Limitations</h2>
+            <p>
+                While bioplastics are promising, they face challenges such as higher production costs, limited recycling infrastructure, and competition with food crops for resources.
+            </p>
+        </div>
+
+        <!-- Future Scope -->
+        <div class="card">
+            <h2>The Future of Bioplastics</h2>
+            <p>
+                With technological advancements and supportive policies, the adoption of bioplastics is set to increase. They could eventually replace conventional plastics in many applications, promoting a circular economy.
+            </p>
+        </div>
+
+        <!-- Trichy Bioplastic Data -->
+        <div class="card">
+            <h2>Bioplastic Usage Data in Trichy</h2>
+            <p>
+                For a detailed analysis of bioplastic and traditional plastic usage in Trichy, click the link below:
+            </p>
+            <a href="https://docs.google.com/document/d/1734u_zIecvfmX8xejd77t7YrNtWKhGLFBV_JTBbw_z8/edit?tab=t.0">Download Bioplastic Usage Data</a>
+        </div>
+    </div>
+
+    <!-- Content Section -->
+</body>
+
+</html>

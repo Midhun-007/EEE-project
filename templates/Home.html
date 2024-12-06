@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Team Projects</title>
+    <link rel="stylesheet" href="style.css"><style>/* General Styles */
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            background-color: #e8f5e9; /* Light green background */
+            color: #333;
+            overflow-x: hidden;
+        }
+        
+        /* Reusing Navbar Styles */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background-color: #333;
+            padding: 10px 0;
+            display: flex;
+            align-items: center;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            z-index: 10;
+            animation: navSlideIn 1s ease-out;
+        }
+        
+        nav .brand {
+            flex-grow: 1;
+            text-align: center;
+            font-size: 20px;
+            font-weight: bold;
+            color: white;
+            animation: fadeInUp 1s ease-out;
+        }
+        
+        nav .links {
+            margin-right: 20px;
+        }
+        
+        nav a {
+            color: white;
+            text-decoration: none;
+            padding: 14px 20px;
+            display: inline-block;
+            transition: background-color 0.3s ease, color 0.3s ease;
+            animation: linkFadeIn 0.8s ease-out;
+        }
+        
+        nav a:hover {
+            background-color: #575757;
+            border-radius: 5px;
+        }
+        
+        /* Hero Section */
+        .hero {
+            text-align: center;
+            margin-top: 250px;
+            padding: 50px 20px;
+            background: linear-gradient(135deg, #66bb6a, #388e3c); /* Green gradient */
+            color: white;
+            animation: heroSectionFadeIn 1s ease-out;
+        }
+        
+        .hero h1 {
+            font-size: 36px;
+            margin-bottom: 10px;
+            animation: slideInLeft 1s ease-out;
+        }
+        
+        .hero p {
+            font-size: 18px;
+            line-height: 1.6;
+            animation: slideInRight 1s ease-out;
+        }
+        
+        /* Content Section */
+        .content-container {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 0 20px;
+            margin-top: 100px;
+            animation: fadeInUp 1.2s ease-out;
+        }
+        
+        .content-container h2 {
+            font-size: 28px;
+            text-align: center;
+            margin-bottom: 50px;
+            color: #388e3c; /* Darker green for headings */
+        }
+        
+        /* Card Container */
+        .card-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin-top: 50px;
+            animation: fadeInUp 1.5s ease-out;
+        }
+        
+        .card {
+            background: white;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+            border-radius: 12px;
+            padding: 20px;
+            margin: 20px 0;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            animation: cardFadeIn 1s ease-out;
+        }
+        
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+        
+        .card h2 {
+            color: #66bb6a; /* Light green */
+            font-size: 24px;
+            margin-bottom: 10px;
+            transition: color 0.3s ease;
+        }
+        
+        .card:hover h2 {
+            color: #388e3c; /* Darker green */
+        }
+        
+        .card p {
+            font-size: 16px;
+            line-height: 1.6;
+            color: #555;
+        }
+        
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.9);
+            color: white;
+            margin-top: 40px;
+            animation: fadeInUp 1s ease-out;
+        }
+        
+        footer p {
+            margin: 0;
+            font-size: 14px;
+        }
+        
+        /* Animations */
+        @keyframes navSlideIn {
+            from {
+                transform: translateY(-100%);
+            }
+            to {
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes linkFadeIn {
+            from {
+                opacity: 0;
+                transform: translateX(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        
+        @keyframes heroSectionFadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        
+        @keyframes slideInRight {
+            from {
+                opacity: 0;
+                transform: translateX(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        
+        @keyframes cardFadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        </style>
+</head>
+<body>
+
+    <nav>
+        <div class="brand">Team Projects</div>
+        <div class="links">
+            <a href="#">Home</a>
+            <a href="#">About</a>
+            <a href="#">Contact</a>
+        </div>
+    </nav>
+
+    <div class="hero">
+        <h1>Welcome to Our Team Projects</h1>
+        <p>Explore the amazing work done by our talented teams across various subprojects.</p>
+    </div>
+
+    <div class="content-container">
+        <h2>Our Teams</h2>
+        <div class="card-container">
+            <!-- Team Card 1 -->
+            <div class="card">
+                <h2>Team Alpha</h2>
+                <div class="members">
+                    <ul>
+                        <li>Project 1: Website Development</li>
+                        <li>Project 2: API Integration</li>
+                        <li>Project 3: Mobile App</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Team Card 2 -->
+            <div class="card">
+                <h2>Team Beta</h2>
+                <div class="members">
+                    <ul>
+                        <li>Project 1: Cloud Infrastructure</li>
+                        <li>Project 2: DevOps Automation</li>
+                        <li>Project 3: Server Optimization</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Team Card 3 -->
+            <div class="card">
+                <h2>Team Gamma</h2>
+                <div class="members">
+                    <ul>
+                        <li>Project 1: Data Analysis</li>
+                        <li>Project 2: Machine Learning Model</li>
+                        <li>Project 3: AI Chatbot</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 Team Projects. All rights reserved.</p>
+    </footer>
+
+</body>
+</html>

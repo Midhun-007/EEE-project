@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task Manager</title>
+    <style>
+        /* Add your styles here */
+    </style>
+</head>
+<body>
+    <div id="main-screen">
+        <button id="daily-tasks-btn">Daily Tasks</button>
+        <button id="green-tasks-btn">Green Tasks</button>
+    </div>
+
+    <div id="daily-tasks-screen" class="hidden">
+        <h2>Daily Tasks</h2>
+        <input type="text" id="task-input" placeholder="Add a task">
+        <button id="save-task-btn">Save Task</button>
+        <button id="back-btn">Back</button>
+        <ul id="task-list"></ul>
+        <div id="daily-progress">
+            <div id="daily-progress-fill"></div>
+        </div>
+    </div>
+
+    <div id="green-tasks-screen" class="hidden">
+        <h2>Green Tasks</h2>
+        <button id="generate-green-task-btn">Generate Green Task</button>
+        <button id="back-green-btn">Back</button>
+        <ul id="green-tasks-list"></ul>
+        <div id="green-progress">
+            <div id="green-progress-fill"></div>
+        </div>
+        <div id="score-display"></div>
+    </div>
+
+    <div id="upload-area">
+        <input type="file" id="upload-input" accept="image/*" style="display: none;">
+        <button id="upload-btn">Upload Image</button>
+        <img id="uploaded-image" alt="Uploaded Image" style="max-width: 200px;">
+    </div>
+
+    <script src="taskManager.js"></script>
+</body>
+</html>

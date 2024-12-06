@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1 id="hi"></h1>
+    <button onclick="getData()">Hi</button>
+    <button onclick="postData()">Send</button>
+    <script >
+        var h1=document.getElementById("hi")
+async function getData() {
+    try {
+        const response=await fetch("http://127.0.0.1:5000//get-data")
+        data= await response.json()
+        h1.textContent=data.message
+        console.log(response)
+    } catch (error) {
+        
+    }
+}
+async function postData(){
+    const Data={message:"hi bro"}
+    console.log("send")
+    try{
+        const response=await fetch('/post-data',{
+            method:'POST',
+            headers:{
+                'Content-Type':'application/json',
+            },
+            body:JSON.stringify(Data),
+        })
+        data=await response.json()
+        console.log(data)
+    }
+    catch(error){
+        console.error('Error:',error)
+    }
+}
+    </script>
+</body>
+</html>
